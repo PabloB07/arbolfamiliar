@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { signUp } from '@/lib/supabase-client';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function SignUpPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -27,6 +29,7 @@ export default function SignUpPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
@@ -41,12 +44,39 @@ export default function SignUpPage() {
       return;
     }
 
-    // TODO: Implement Supabase authentication
-    // For now, simulate signup
-    setTimeout(() => {
+    try {
+      const { data, error: signUpError } = await signUp(
+        formData.email, 
+        formData.password, 
+        formData.fullName
+      );
+      
+      if (signUpError) {
+        if (signUpError.message.includes('already registered')) {
+          setError('Este correo ya está registrado. Por favor inicia sesión.');
+        } else {
+          setError(signUpError.message);
+        }
+        setLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        // Verificar si necesita confirmación de email
+        if (data.user.identities && data.user.identities.length === 0) {
+          setSuccess('Cuenta creada. Por favor verifica tu correo electrónico.');
+          setLoading(false);
+        } else {
+          setSuccess('¡Cuenta creada exitosamente! Redirigiendo...');
+          setTimeout(() => {
+            router.push('/tree');
+          }, 1500);
+        }
+      }
+    } catch (err) {
+      setError('Error al crear la cuenta. Por favor intenta de nuevo.');
       setLoading(false);
-      router.push('/tree');
-    }, 1000);
+    }
   };
 
   return (
@@ -76,6 +106,17 @@ export default function SignUpPage() {
               className="mb-4 p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg text-sm"
             >
               {error}
+            </motion.div>
+          )}
+
+          {/* Success Message */}
+          {success && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mb-4 p-3 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded-lg text-sm"
+            >
+              {success}
             </motion.div>
           )}
 

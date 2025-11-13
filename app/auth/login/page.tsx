@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { signIn } from '@/lib/supabase-client';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,12 +18,25 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
-    // TODO: Implement Supabase authentication
-    // For now, simulate login
-    setTimeout(() => {
+    try {
+      const { data, error: signInError } = await signIn(email, password);
+      
+      if (signInError) {
+        setError(signInError.message === 'Invalid login credentials' 
+          ? 'Credenciales inválidas. Por favor verifica tu correo y contraseña.' 
+          : signInError.message);
+        setLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        // Login exitoso
+        router.push('/tree');
+      }
+    } catch (err) {
+      setError('Error al iniciar sesión. Por favor intenta de nuevo.');
       setLoading(false);
-      router.push('/tree');
-    }, 1000);
+    }
   };
 
   return (

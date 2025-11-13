@@ -417,6 +417,7 @@ export default function Tree3D() {
         shadows
         camera={{ position: [0, 2, 8], fov: 50 }}
         gl={{ antialias: true }}
+        style={{ outline: 'none', border: 'none', boxShadow: 'none' }}
       >
         {/* Iluminación */}
         <ambientLight intensity={0.4} />
