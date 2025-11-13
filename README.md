@@ -2,6 +2,9 @@
 
 A beautiful and modern genealogic tree website built with Next.js 16, TypeScript, Supabase, Tailwind CSS, and Framer Motion.
 
+<img width="1274" height="925" alt="image" src="https://github.com/user-attachments/assets/2f3af353-1c5c-4800-8c24-074e5038559d" />
+
+
 ## 🚀 Features
 
 - **Interactive Family Tree Visualization**: View your family history in a beautiful, animated tree structure
