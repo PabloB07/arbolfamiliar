@@ -1,36 +1,166 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌳 Árbol Familiar - Genealogic Tree Website
 
-## Getting Started
+A beautiful and modern genealogic tree website built with Next.js 16, TypeScript, Supabase, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Interactive Family Tree Visualization**: View your family history in a beautiful, animated tree structure
+- **Member Management**: Add, edit, and delete family members with detailed information
+- **Authentication**: Secure login and signup with Supabase Auth
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Dark Mode Support**: Automatic dark mode based on system preferences
+- **Beautiful Animations**: Smooth animations powered by Framer Motion
+- **Modern UI**: Clean and intuitive interface built with Tailwind CSS
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js 18+ 
+- npm or yarn
+- A Supabase account
+
+## 🛠️ Installation
+
+1. **Clone the repository** (if using git) or navigate to the project directory:
+   ```bash
+   cd arbolfamiliar
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up Supabase**:
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Go to Settings > API to find your project URL and anon key
+   - Run the SQL schema in your Supabase SQL Editor (found in `supabase-schema.sql`)
+
+4. **Configure environment variables**:
+   - Create a `.env.local` file in the root directory
+   - Add your Supabase credentials:
+     ```
+     NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+     ```
+
+5. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser** and navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📦 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Database & Auth**: Supabase
+- **Animations**: Framer Motion
+- **Fonts**: Geist Sans & Geist Mono
+
+## 📁 Project Structure
+
+```
+arbolfamiliar/
+├── app/                    # Next.js app directory
+│   ├── auth/              # Authentication pages
+│   ├── members/           # Family members page
+│   ├── tree/              # Family tree visualization page
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   └── globals.css        # Global styles
+├── components/            # React components
+│   ├── FamilyTree.tsx     # Family tree visualization
+│   ├── FamilyTreeNode.tsx # Individual tree node
+│   ├── MemberForm.tsx     # Member add/edit form
+│   ├── Navbar.tsx         # Navigation bar
+│   └── Footer.tsx         # Footer component
+├── lib/                   # Utility functions
+│   ├── supabase.ts        # Supabase server client
+│   └── supabase-client.ts # Supabase client helpers
+├── types/                 # TypeScript type definitions
+│   ├── supabase.ts        # Supabase database types
+│   └── family.ts          # Family-related types
+└── supabase-schema.sql    # Database schema
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗄️ Database Schema
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application uses three main tables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### profiles
+- User profile information
+- Linked to Supabase Auth
 
-## Learn More
+### family_members
+- Detailed information about family members
+- Includes birth/death dates, occupation, bio, etc.
 
-To learn more about Next.js, take a look at the following resources:
+### relationships
+- Connects family members together
+- Supports parent, spouse, sibling, and child relationships
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Colors
+The primary color scheme uses emerald green. To change this, update the colors in:
+- `app/globals.css` (CSS variables)
+- Component className props (Tailwind classes)
 
-## Deploy on Vercel
+### Fonts
+The project uses Geist Sans and Geist Mono. To change fonts, modify `app/layout.tsx`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Deploy to Vercel
+
+1. Push your code to a Git repository (GitHub, GitLab, Bitbucket)
+2. Import your repository on [Vercel](https://vercel.com)
+3. Add your environment variables in the Vercel dashboard
+4. Deploy!
+
+### Deploy to Netlify
+
+1. Push your code to a Git repository
+2. Import your repository on [Netlify](https://netlify.com)
+3. Add build command: `npm run build`
+4. Add publish directory: `.next`
+5. Add your environment variables
+6. Deploy!
+
+## 📝 Development Roadmap
+
+- [ ] Implement actual Supabase authentication
+- [ ] Add photo upload functionality
+- [ ] Create relationship management interface
+- [ ] Add search and filter capabilities
+- [ ] Export family tree as PDF/Image
+- [ ] Add family events timeline
+- [ ] Multi-language support
+- [ ] Share family tree with others
+- [ ] Import/Export GEDCOM files
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- Next.js team for the amazing framework
+- Supabase for the backend infrastructure
+- Tailwind CSS for the styling system
+- Framer Motion for beautiful animations
+
+## 📞 Support
+
+If you have any questions or need help, please open an issue on the repository.
+
+---
+
+Made with ❤️ for preserving family histories
