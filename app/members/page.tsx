@@ -1,90 +1,65 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import FamilyTreeNode from '@/components/FamilyTreeNode';
 import type { FamilyMember } from '@/types/family';
-
-// Demo data
-const demoMembers: FamilyMember[] = [
-  {
-    id: '1',
-    user_id: 'demo',
-    first_name: 'Juan',
-    last_name: 'García',
-    birth_date: '1950-05-15',
-    gender: 'male',
-    occupation: 'Ingeniero',
-    bio: 'Fundador de la familia García. Ingeniero civil con más de 40 años de experiencia.',
-    birth_place: 'Madrid, España',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: '2',
-    user_id: 'demo',
-    first_name: 'María',
-    last_name: 'García',
-    maiden_name: 'López',
-    birth_date: '1975-08-20',
-    gender: 'female',
-    occupation: 'Médico',
-    bio: 'Doctora especializada en pediatría.',
-    birth_place: 'Barcelona, España',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: '3',
-    user_id: 'demo',
-    first_name: 'Pedro',
-    last_name: 'García',
-    birth_date: '1978-12-05',
-    gender: 'male',
-    occupation: 'Arquitecto',
-    bio: 'Arquitecto especializado en diseño sostenible.',
-    birth_place: 'Barcelona, España',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: '4',
-    user_id: 'demo',
-    first_name: 'Carlos',
-    last_name: 'García',
-    birth_date: '2005-03-10',
-    gender: 'male',
-    occupation: 'Estudiante',
-    bio: 'Estudiante de secundaria apasionado por la tecnología.',
-    birth_place: 'Valencia, España',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: '5',
-    user_id: 'demo',
-    first_name: 'Ana',
-    last_name: 'García',
-    birth_date: '2008-11-25',
-    gender: 'female',
-    occupation: 'Estudiante',
-    bio: 'Estudiante con talento artístico.',
-    birth_place: 'Valencia, España',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-];
+import { getCurrentUser, getFamilyMembers } from '@/lib/supabase-client';
 
 export default function MembersPage() {
-  const [members] = useState<FamilyMember[]>(demoMembers);
+  const router = useRouter();
+  const [members, setMembers] = useState<FamilyMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMember, setSelectedMember] = useState<FamilyMember | null>(null);
+
+  useEffect(() => {
+    loadFamilyMembers();
+  }, []);
+
+  const loadFamilyMembers = async () => {
+    try {
+      const user = await getCurrentUser();
+      
+      if (!user) {
+        router.push('/auth/login');
+        return;
+      }
+
+      const { data, error: fetchError } = await getFamilyMembers(user.id);
+      
+      if (fetchError) {
+        setError('Error al cargar los miembros de la familia');
+        console.error(fetchError);
+      } else {
+        setMembers(data || []);
+      }
+    } catch (err) {
+      setError('Error inesperado al cargar los datos');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredMembers = members.filter(
     (member) =>
       member.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.last_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl animate-pulse mb-4">👨‍👩‍👧‍👦</div>
+          <p className="text-gray-600 dark:text-gray-400">Cargando miembros...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900">
@@ -115,6 +90,17 @@ export default function MembersPage() {
           </div>
         </motion.div>
 
+        {/* Error Message */}
+        {error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mb-6 p-4 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg"
+          >
+            {error}
+          </motion.div>
+        )}
+
         {/* Search */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -131,14 +117,34 @@ export default function MembersPage() {
           />
         </motion.div>
 
-        {/* Members Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredMembers.map((member, index) => (
+        {/* Empty State */}
+        {members.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+              No hay miembros aún
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Comienza agregando el primer miembro de tu familia
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-md"
+            >
+              ➕ Agregar Primer Miembro
+            </motion.button>
+          </div>
+        ) : (
+          <>
+            {/* Members Grid */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filteredMembers.map((member, index) => (
             <motion.div
               key={member.id}
               initial={{ opacity: 0, y: 20 }}
@@ -167,18 +173,20 @@ export default function MembersPage() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+            </motion.div>
 
-        {filteredMembers.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              No se encontraron miembros
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Intenta con otro término de búsqueda
-            </p>
-          </div>
+            {filteredMembers.length === 0 && searchTerm && (
+              <div className="text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  No se encontraron miembros
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Intenta con otro término de búsqueda
+                </p>
+              </div>
+            )}
+          </>
         )}
 
         {/* Member Details Modal */}

@@ -165,6 +165,7 @@ function Tree() {
 function Ground() {
   return (
     <>
+      {/* Superficie de césped */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.3, 0]} receiveShadow>
         <circleGeometry args={[8, 32]} />
         <meshStandardMaterial 
@@ -175,7 +176,162 @@ function Ground() {
       
       {/* Pequeñas flores decorativas */}
       <Flowers />
+      
+      {/* Parte inferior de la isla flotante */}
+      <IslandBottom />
     </>
+  );
+}
+
+// Parte inferior de la isla flotante - Mejorada
+function IslandBottom() {
+  return (
+    <group>
+      {/* Borde de transición césped-tierra */}
+      <mesh position={[0, -3.35, 0]} castShadow>
+        <cylinderGeometry args={[7.8, 7.6, 0.15, 32]} />
+        <meshStandardMaterial color="#6b8e23" roughness={0.85} />
+      </mesh>
+
+      {/* Capa de tierra superior oscura */}
+      <mesh position={[0, -3.6, 0]} castShadow>
+        <cylinderGeometry args={[7.6, 7, 0.4, 32]} />
+        <meshStandardMaterial color="#8b6f47" roughness={0.9} />
+      </mesh>
+
+      {/* Capa de tierra con textura */}
+      <mesh position={[0, -4.1, 0]} castShadow>
+        <cylinderGeometry args={[7, 6, 0.8, 32]} />
+        <meshStandardMaterial color="#7a5c3e" roughness={0.92} />
+      </mesh>
+
+      {/* Capa de tierra media */}
+      <mesh position={[0, -4.8, 0]} castShadow>
+        <cylinderGeometry args={[6, 5, 1, 32]} />
+        <meshStandardMaterial color="#6b5638" roughness={0.94} />
+      </mesh>
+
+      {/* Capa rocosa superior */}
+      <mesh position={[0, -5.6, 0]} castShadow>
+        <cylinderGeometry args={[5, 4, 1, 32]} />
+        <meshStandardMaterial color="#5a4a3a" roughness={0.95} />
+      </mesh>
+
+      {/* Capa rocosa media */}
+      <mesh position={[0, -6.4, 0]} castShadow>
+        <cylinderGeometry args={[4, 3, 1, 32]} />
+        <meshStandardMaterial color="#4d3d2d" roughness={0.96} />
+      </mesh>
+
+      {/* Capa rocosa oscura */}
+      <mesh position={[0, -7.1, 0]} castShadow>
+        <cylinderGeometry args={[3, 2.2, 1, 32]} />
+        <meshStandardMaterial color="#3d2d1d" roughness={0.97} />
+      </mesh>
+
+      {/* Punta rocosa de la isla - más alargada */}
+      <mesh position={[0, -7.8, 0]} castShadow>
+        <coneGeometry args={[2.2, 1.5, 32]} />
+        <meshStandardMaterial color="#2d1d0d" roughness={1} />
+      </mesh>
+
+      {/* Raíces colgantes */}
+      <FloatingRoots />
+      
+      {/* Estalactitas rocosas pequeñas */}
+      <RockStalactites />
+    </group>
+  );
+}
+
+// Estalactitas pequeñas en la parte inferior
+function RockStalactites() {
+  const stalactites = useMemo(() => {
+    const stalArray = [];
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 + Math.random() * 0.3;
+      const radius = 3 + Math.random() * 2;
+      stalArray.push({
+        position: [
+          Math.cos(angle) * radius,
+          -6.8 - Math.random() * 0.5,
+          Math.sin(angle) * radius,
+        ] as [number, number, number],
+        scale: 0.15 + Math.random() * 0.15,
+      });
+    }
+    return stalArray;
+  }, []);
+
+  return (
+    <group>
+      {stalactites.map((stal, i) => (
+        <mesh key={i} position={stal.position} castShadow>
+          <coneGeometry args={[stal.scale, stal.scale * 2, 8]} />
+          <meshStandardMaterial color="#3d2d1d" roughness={1} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+// Raíces que cuelgan de la isla - Mejoradas
+function FloatingRoots() {
+  const roots = useMemo(() => {
+    const rootArray: Array<{
+      position: [number, number, number];
+      rotation: [number, number, number];
+      length: number;
+      thickness: number;
+    }> = [];
+    
+    // Raíces en diferentes niveles de la isla
+    const levels = [
+      { y: -5, radius: 5.5, count: 6, length: [1, 1.5] },
+      { y: -6, radius: 4, count: 5, length: [0.8, 1.2] },
+      { y: -7, radius: 2.5, count: 4, length: [0.5, 0.9] },
+    ];
+
+    levels.forEach((level) => {
+      for (let i = 0; i < level.count; i++) {
+        const angle = (i / level.count) * Math.PI * 2 + Math.random() * 0.4;
+        const r = level.radius + (Math.random() - 0.5) * 0.5;
+        const length = level.length[0] + Math.random() * (level.length[1] - level.length[0]);
+        
+        rootArray.push({
+          position: [
+            Math.cos(angle) * r,
+            level.y - Math.random() * 0.3,
+            Math.sin(angle) * r,
+          ] as [number, number, number],
+          rotation: [
+            Math.random() * 0.4 - 0.2,
+            angle,
+            Math.random() * 0.4 - 0.2,
+          ] as [number, number, number],
+          length,
+          thickness: 0.04 + Math.random() * 0.03,
+        });
+      }
+    });
+    
+    return rootArray;
+  }, []);
+
+  return (
+    <group>
+      {roots.map((root, i) => (
+        <mesh
+          key={i}
+          position={root.position}
+          rotation={root.rotation}
+          castShadow
+        >
+          <cylinderGeometry args={[root.thickness, root.thickness * 0.5, root.length, 6]} />
+          <meshStandardMaterial color="#654321" roughness={0.9} />
+        </mesh>
+      ))}
+    </group>
   );
 }
 
@@ -388,6 +544,161 @@ function OldMan() {
   );
 }
 
+// Moai de la Isla de Pascua - Detallado
+function Moai() {
+  const moaiRef = useRef<THREE.Group>(null);
+  
+  useFrame((state) => {
+    if (moaiRef.current) {
+      // Movimiento sutil con el tiempo
+      moaiRef.current.rotation.y = 0.3 + Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
+    }
+  });
+
+  // Material de piedra
+  const stoneMaterial = new THREE.MeshStandardMaterial({
+    color: 0x8b7355,
+    roughness: 0.8,
+    metalness: 0.1,
+  });
+
+  const darkStoneMaterial = new THREE.MeshStandardMaterial({
+    color: 0x5a4a3a,
+    roughness: 0.9,
+  });
+
+  return (
+    <group ref={moaiRef} position={[-4.5, -2.8, 1]} rotation={[0, 0.3, 0]}>
+      {/* Cuerpo/Cuello */}
+      <mesh position={[0, 0.25, 0]} castShadow>
+        <boxGeometry args={[0.8, 1, 0.6]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Mentón */}
+      <mesh position={[0, 0.8, 0.05]} castShadow>
+        <boxGeometry args={[0.9, 0.4, 0.65]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Cabeza principal */}
+      <mesh position={[0, 1.5, 0]} castShadow>
+        <boxGeometry args={[1, 1.5, 0.75]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Frente prominente */}
+      <mesh position={[0, 2.1, 0.1]} castShadow>
+        <boxGeometry args={[1, 0.4, 0.6]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Nariz larga característica */}
+      <mesh position={[0, 1.6, 0.45]} castShadow>
+        <boxGeometry args={[0.2, 0.6, 0.4]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Ojos hundidos */}
+      <mesh position={[-0.25, 1.9, 0.35]}>
+        <boxGeometry args={[0.25, 0.2, 0.15]} />
+        <primitive object={darkStoneMaterial} attach="material" />
+      </mesh>
+      <mesh position={[0.25, 1.9, 0.35]}>
+        <boxGeometry args={[0.25, 0.2, 0.15]} />
+        <primitive object={darkStoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Boca/Labios */}
+      <mesh position={[0, 1.15, 0.4]} castShadow>
+        <boxGeometry args={[0.5, 0.15, 0.25]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Orejas alargadas */}
+      <mesh position={[-0.55, 1.75, 0]} castShadow>
+        <boxGeometry args={[0.15, 0.75, 0.2]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+      <mesh position={[0.55, 1.75, 0]} castShadow>
+        <boxGeometry args={[0.15, 0.75, 0.2]} />
+        <primitive object={stoneMaterial} attach="material" />
+      </mesh>
+
+      {/* Pukao (sombrero rojo) */}
+      <mesh position={[0, 2.5, 0]} castShadow>
+        <cylinderGeometry args={[0.55, 0.6, 0.35, 16]} />
+        <meshStandardMaterial color="#b8564a" roughness={0.85} />
+      </mesh>
+    </group>
+  );
+}
+
+// Delimitador con ramas onduladas - estilo wave
+function BranchWaveDivider() {
+  const branchWaves = useMemo(() => {
+    const waveArray = [];
+    const waveCount = 24; // Más ramas para un efecto más suave
+    
+    for (let i = 0; i < waveCount; i++) {
+      const angle = (i / waveCount) * Math.PI * 2;
+      const radius = 6.5;
+      const x = Math.cos(angle) * radius;
+      const z = Math.sin(angle) * radius;
+      
+      // Efecto de ola con múltiples ondas
+      const waveHeight = Math.sin(angle * 4) * 0.5; // 4 olas alrededor
+      const y = waveHeight - 3.25;
+      
+      // Rotación para que apunten hacia fuera y ligeramente hacia arriba
+      const outwardRotation = [
+        Math.sin(angle * 2) * 0.3, // Inclinación variable
+        angle + Math.PI / 2, // Apuntan hacia fuera
+        waveHeight * 0.4, // Se inclinan según la ola
+      ] as [number, number, number];
+      
+      waveArray.push({
+        position: [x, y, z] as [number, number, number],
+        rotation: outwardRotation,
+        scale: 0.8 + Math.abs(waveHeight) * 0.4, // Más grandes en las crestas
+      });
+    }
+    return waveArray;
+  }, []);
+
+  return (
+    <group>
+      {branchWaves.map((wave, i) => (
+        <group key={i} position={wave.position} rotation={wave.rotation}>
+          {/* Rama principal */}
+          <mesh castShadow>
+            <cylinderGeometry args={[0.06, 0.1, wave.scale, 8]} />
+            <meshStandardMaterial color="#654321" roughness={0.9} />
+          </mesh>
+          
+          {/* Ramita izquierda */}
+          <mesh position={[-0.08, wave.scale * 0.3, 0]} rotation={[0, 0, -0.5]} castShadow>
+            <cylinderGeometry args={[0.03, 0.04, wave.scale * 0.4, 6]} />
+            <meshStandardMaterial color="#765432" roughness={0.9} />
+          </mesh>
+          
+          {/* Ramita derecha */}
+          <mesh position={[0.08, wave.scale * 0.35, 0]} rotation={[0, 0, 0.5]} castShadow>
+            <cylinderGeometry args={[0.03, 0.04, wave.scale * 0.4, 6]} />
+            <meshStandardMaterial color="#765432" roughness={0.9} />
+          </mesh>
+          
+          {/* Hojas en las puntas */}
+          <mesh position={[0, wave.scale * 0.5, 0]}>
+            <sphereGeometry args={[0.12, 6, 6]} />
+            <meshStandardMaterial color="#4a8526" roughness={0.7} />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+}
+
 // Componente de escena 3D
 function Scene() {
   const groupRef = useRef<THREE.Group>(null);
@@ -405,6 +716,8 @@ function Scene() {
       <Ground />
       <Particles />
       <OldMan />
+      <Moai />
+      <BranchWaveDivider />
     </group>
   );
 }
@@ -412,12 +725,20 @@ function Scene() {
 // Componente principal exportable
 export default function Tree3D() {
   return (
-    <div className="w-full h-full">
+    <section className="w-full h-full">
       <Canvas
         shadows
-        camera={{ position: [0, 2, 8], fov: 50 }}
-        gl={{ antialias: true }}
-        style={{ outline: 'none', border: 'none', boxShadow: 'none' }}
+        camera={{ position: [0, 0, 12], fov: 55 }}
+        gl={{ antialias: true, alpha: true }}
+        style={{ 
+          outline: 'none', 
+          border: 'none', 
+          boxShadow: 'none',
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          background: 'transparent'
+        }}
       >
         {/* Iluminación */}
         <ambientLight intensity={0.4} />
@@ -434,16 +755,12 @@ export default function Tree3D() {
           shadow-camera-bottom={-10}
         />
         <pointLight position={[-5, 5, -5]} intensity={0.5} color="#ffa500" />
-        <pointLight position={[5, 3, 5]} intensity={0.3} color="#87ceeb" />
+        <pointLight position={[5, 3, 5]} intensity={0.3} color="#ffffff" />
         
         {/* Escena */}
         <Scene />
-        
-        {/* Fondo con gradiente */}
-        <color attach="background" args={['#87ceeb']} />
-        <fog attach="fog" args={['#87ceeb', 10, 30]} />
       </Canvas>
-    </div>
+    </section>
   );
 }
 

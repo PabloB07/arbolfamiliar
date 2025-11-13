@@ -14,6 +14,9 @@ const Tree3D = dynamic(() => import('@/components/Tree3D'), {
   ),
 });
 
+// Importar el divisor de ondas
+import WaveDivider from '@/components/WaveDivider';
+
 export default function Home() {
   const features = [
     {
@@ -58,23 +61,14 @@ export default function Home() {
             Crea, gestiona y comparte tu árbol genealógico. Conecta con tus raíces
             y preserva tu legado para las generaciones futuras.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Link href="/auth/signup">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-emerald-600 text-white rounded-lg text-lg font-semibold hover:bg-emerald-700 transition-colors shadow-lg"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all text-lg font-semibold shadow-lg shadow-emerald-500/30"
               >
                 Comenzar Gratis
-              </motion.button>
-            </Link>
-            <Link href="/tree">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-2 border-gray-200 dark:border-gray-700"
-              >
-                Ver Demo
               </motion.button>
             </Link>
           </div>
@@ -85,14 +79,20 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-16 w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl border-4 border-emerald-200 dark:border-emerald-800"
+          className="mt-16 w-full h-[350px] max-w-4xl mx-auto"
         >
           <Tree3D />
         </motion.div>
       </section>
 
+      {/* Wave Divider */}
+      <div className="relative -mt-1">
+        <WaveDivider />
+      </div>
+
       {/* Features Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="bg-white dark:bg-gray-900 -mt-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -129,6 +129,7 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* CTA Section */}
@@ -148,9 +149,9 @@ export default function Home() {
           </p>
           <Link href="/auth/signup">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text-emerald-600 rounded-lg text-lg font-semibold hover:bg-emerald-50 transition-colors shadow-lg"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-4 bg-white text-emerald-600 rounded-xl text-lg font-semibold hover:bg-emerald-50 transition-all shadow-lg"
             >
               Crear Cuenta Gratis
             </motion.button>
