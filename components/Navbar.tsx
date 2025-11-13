@@ -30,19 +30,19 @@ export default function Navbar() {
                   href="/"
                   className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium"
                 >
-                  Mi Árbol
+                  Inicio
                 </Link>
                 <Link
                   href="/tree"
                   className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium"
                 >
-                  Miembros
+                  Mi Árbol
                 </Link>
                 <Link
                   href="/members"
                   className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium"
                 >
-                  Inicio
+                  Miembros
                 </Link>
               </div>
 
