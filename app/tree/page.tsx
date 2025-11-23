@@ -45,17 +45,17 @@ export default function TreePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl animate-pulse mb-4">🌳</div>
-          <p className="text-gray-600 dark:text-gray-400">Cargando árbol familiar...</p>
+          <p className="text-gray-600">Cargando árbol familiar...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -65,23 +65,23 @@ export default function TreePage() {
         >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">
                 Mi Árbol Genealógico
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600">
                 Explora tu historia familiar
               </p>
             </div>
 
             <div className="flex gap-4">
               {/* View Toggle */}
-              <div className="flex bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+              <div className="flex bg-white rounded-lg shadow-md border border-gray-200">
                 <button
                   onClick={() => setView('tree')}
                   className={`px-4 py-2 rounded-l-lg transition-colors ${
                     view === 'tree'
                       ? 'bg-emerald-600 text-white'
-                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      : 'text-gray-600 hover:bg-gray-50
                   }`}
                 >
                   🌳 Árbol
@@ -91,7 +91,7 @@ export default function TreePage() {
                   className={`px-4 py-2 rounded-r-lg transition-colors ${
                     view === 'list'
                       ? 'bg-emerald-600 text-white'
-                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      : 'text-gray-600 hover:bg-gray-50
                   }`}
                 >
                   📋 Lista
@@ -114,7 +114,7 @@ export default function TreePage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mb-6 p-4 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg"
+            className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg"
           >
             {error}
           </motion.div>
@@ -125,15 +125,15 @@ export default function TreePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+          className="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden"
         >
           {members.length === 0 ? (
             <div className="text-center py-16 px-4">
               <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
-              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">
                 Tu árbol está vacío
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-gray-600 mb-6">
                 Comienza agregando el primer miembro de tu familia
               </p>
               <motion.button
@@ -153,25 +153,25 @@ export default function TreePage() {
               {members.map((member) => (
                 <div
                   key={member.id}
-                  className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <h3 className="text-lg font-semibold text-gray-900">
                         {member.first_name} {member.last_name}
                       </h3>
                       {member.birth_date && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-sm text-gray-600">
                           Nacido: {new Date(member.birth_date).toLocaleDateString('es-ES')}
                         </p>
                       )}
                       {member.occupation && (
-                        <p className="text-sm text-emerald-600 dark:text-emerald-400">
+                        <p className="text-sm text-emerald-600">
                           {member.occupation}
                         </p>
                       )}
                     </div>
-                    <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <button className="text-gray-400 hover:text-gray-600">
                       ✏️
                     </button>
                   </div>
@@ -189,17 +189,17 @@ export default function TreePage() {
             transition={{ delay: 0.4 }}
             className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
               <div className="text-3xl font-bold text-emerald-600">{members.length}</div>
-              <div className="text-gray-600 dark:text-gray-400">Miembros Totales</div>
+              <div className="text-gray-600">Miembros Totales</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
               <div className="text-3xl font-bold text-blue-600">-</div>
-              <div className="text-gray-600 dark:text-gray-400">Generaciones</div>
+              <div className="text-gray-600">Generaciones</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
               <div className="text-3xl font-bold text-purple-600">-</div>
-              <div className="text-gray-600 dark:text-gray-400">Años de Historia</div>
+              <div className="text-gray-600">Años de Historia</div>
             </div>
           </motion.div>
         )}

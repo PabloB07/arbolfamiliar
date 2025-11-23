@@ -52,17 +52,17 @@ export default function MembersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl animate-pulse mb-4">👨‍👩‍👧‍👦</div>
-          <p className="text-gray-600 dark:text-gray-400">Cargando miembros...</p>
+          <p className="text-gray-600">Cargando miembros...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <motion.div
@@ -72,10 +72,10 @@ export default function MembersPage() {
         >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">
                 Miembros de la Familia
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600">
                 Gestiona la información de tu familia
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function MembersPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mb-6 p-4 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg"
+            className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg"
           >
             {error}
           </motion.div>
@@ -113,7 +113,7 @@ export default function MembersPage() {
             placeholder="Buscar miembros..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
         </motion.div>
 
@@ -121,10 +121,10 @@ export default function MembersPage() {
         {members.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
               No hay miembros aún
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Comienza agregando el primer miembro de tu familia
             </p>
             <motion.button
@@ -151,23 +151,23 @@ export default function MembersPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setSelectedMember(member)}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow cursor-pointer"
+              className="bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow cursor-pointer"
             >
               <div className="flex justify-center mb-4">
                 <FamilyTreeNode member={member} />
               </div>
 
               {member.bio && (
-                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-4">
+                <p className="text-sm text-gray-600 line-clamp-2 mb-4">
                   {member.bio}
                 </p>
               )}
 
               <div className="flex gap-2">
-                <button className="flex-1 px-3 py-2 bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 rounded-lg text-sm hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors">
+                <button className="flex-1 px-3 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm hover:bg-emerald-200 transition-colors">
                   Ver Detalles
                 </button>
-                <button className="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                <button className="flex-1 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200 transition-colors">
                   Editar
                 </button>
               </div>
@@ -178,10 +178,10 @@ export default function MembersPage() {
             {filteredMembers.length === 0 && searchTerm && (
               <div className="text-center py-16">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   No se encontraron miembros
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-600">
                   Intenta con otro término de búsqueda
                 </p>
               </div>
@@ -201,15 +201,15 @@ export default function MembersPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-xl shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-start mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="text-2xl font-bold text-gray-900">
                   {selectedMember.first_name} {selectedMember.last_name}
                 </h2>
                 <button
                   onClick={() => setSelectedMember(null)}
-                  className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                  className="text-gray-500 hover:text-gray-700"
                 >
                   <svg
                     className="w-6 h-6"
@@ -230,40 +230,40 @@ export default function MembersPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
                 {selectedMember.birth_date && (
                   <div>
-                    <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-700">
                       Fecha de Nacimiento:
                     </span>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600">
                       {new Date(selectedMember.birth_date).toLocaleDateString('es-ES')}
                     </p>
                   </div>
                 )}
                 {selectedMember.birth_place && (
                   <div>
-                    <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-700">
                       Lugar de Nacimiento:
                     </span>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600">
                       {selectedMember.birth_place}
                     </p>
                   </div>
                 )}
                 {selectedMember.occupation && (
                   <div>
-                    <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-700">
                       Ocupación:
                     </span>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600">
                       {selectedMember.occupation}
                     </p>
                   </div>
                 )}
                 {selectedMember.gender && (
                   <div>
-                    <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    <span className="font-semibold text-gray-700">
                       Género:
                     </span>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-600">
                       {selectedMember.gender === 'male' ? 'Masculino' : selectedMember.gender === 'female' ? 'Femenino' : 'Otro'}
                     </p>
                   </div>
@@ -272,10 +272,10 @@ export default function MembersPage() {
 
               {selectedMember.bio && (
                 <div className="mb-6">
-                  <span className="font-semibold text-gray-700 dark:text-gray-300 block mb-2">
+                  <span className="font-semibold text-gray-700 block mb-2">
                     Biografía:
                   </span>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed">
                     {selectedMember.bio}
                   </p>
                 </div>
@@ -285,7 +285,7 @@ export default function MembersPage() {
                 <button className="flex-1 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                   Editar
                 </button>
-                <button className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                <button className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
                   Ver Árbol
                 </button>
               </div>

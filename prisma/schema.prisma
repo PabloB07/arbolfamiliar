@@ -1,0 +1,77 @@
+// Prisma Schema para Supabase PostgreSQL
+// Prisma maneja las migraciones, Supabase maneja Auth, Storage, etc.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // Usa la connection string de Supabase (direct connection, no pooler para migraciones)
+}
+
+// Perfiles de usuario (vinculado a auth.users de Supabase)
+model Profile {
+  id        String   @id @db.Uuid
+  email     String   @unique
+  fullName  String?  @map("full_name")
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relaciones
+  familyMembers FamilyMember[]
+  relationships Relationship[]
+
+  @@map("profiles")
+}
+
+// Miembros de la familia
+model FamilyMember {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  firstName  String   @map("first_name")
+  lastName   String   @map("last_name")
+  maidenName String?  @map("maiden_name")
+  birthDate  DateTime? @map("birth_date") @db.Date
+  deathDate  DateTime? @map("death_date") @db.Date
+  gender     String?  // 'male', 'female', 'other'
+  photoUrl   String?  @map("photo_url")
+  bio        String?  @db.Text
+  birthPlace String?  @map("birth_place")
+  deathPlace String?  @map("death_place")
+  occupation String?
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Relaciones
+  user         Profile        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  relationships Relationship[] @relation("MemberRelationships")
+  relatedTo    Relationship[]  @relation("RelatedMemberRelationships")
+
+  @@index([userId])
+  @@map("family_members")
+}
+
+// Relaciones familiares
+model Relationship {
+  id              String   @id @default(uuid()) @db.Uuid
+  userId          String   @map("user_id") @db.Uuid
+  memberId        String   @map("member_id") @db.Uuid
+  relatedMemberId String   @map("related_member_id") @db.Uuid
+  relationshipType String  @map("relationship_type") // 'parent', 'spouse', 'sibling', 'child'
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  // Relaciones
+  user          Profile       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  member        FamilyMember  @relation("MemberRelationships", fields: [memberId], references: [id], onDelete: Cascade)
+  relatedMember FamilyMember  @relation("RelatedMemberRelationships", fields: [relatedMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([memberId, relatedMemberId, relationshipType])
+  @@index([userId])
+  @@index([memberId])
+  @@index([relatedMemberId])
+  @@map("relationships")
+}
+

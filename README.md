@@ -34,7 +34,7 @@ Before you begin, ensure you have the following installed:
 3. **Set up Supabase**:
    - Create a new project at [supabase.com](https://supabase.com)
    - Go to Settings > API to find your project URL and anon key
-   - Run the SQL schema in your Supabase SQL Editor (found in `supabase-schema.sql`)
+   - Go to Settings > Database to get your connection string
 
 4. **Configure environment variables**:
    - Create a `.env.local` file in the root directory
@@ -42,14 +42,27 @@ Before you begin, ensure you have the following installed:
      ```
      NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
      NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+     DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@[PROJECT-REF].supabase.co:5432/postgres?schema=public"
      ```
+   - Use the **Direct connection** string (not the pooler) for Prisma migrations
 
-5. **Run the development server**:
+5. **Set up Prisma** (for database migrations):
+   ```bash
+   # Generate Prisma Client
+   npm run db:generate
+   
+   # Push schema to database (or use migrations)
+   npm run db:push
+   # OR create a migration
+   npm run db:migrate
+   ```
+
+6. **Run the development server**:
    ```bash
    npm run dev
    ```
 
-6. **Open your browser** and navigate to [http://localhost:3000](http://localhost:3000)
+7. **Open your browser** and navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📦 Tech Stack
 
@@ -57,6 +70,7 @@ Before you begin, ensure you have the following installed:
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS 4
 - **Database & Auth**: Supabase
+- **ORM & Migrations**: Prisma
 - **Animations**: Framer Motion
 - **Fonts**: Geist Sans & Geist Mono
 

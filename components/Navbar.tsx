@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 mx-4 mt-4">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-gray-900/50">
+        <div className="bg-transparent backdrop-blur-xl border border-gray-200/30 rounded-2xl shadow-lg shadow-gray-200/20">
           <div className="px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
@@ -20,7 +20,7 @@ export default function Navbar() {
                   className="flex items-center space-x-2"
                 >
                   <span className="text-2xl">🌳</span>
-                  <span className="text-gray-900 dark:text-white font-semibold text-lg">ÁrbolFamiliar</span>
+                  <span className="text-gray-900 font-semibold text-lg">ÁrbolFamiliar</span>
                 </motion.div>
               </Link>
 
@@ -28,19 +28,19 @@ export default function Navbar() {
               <div className="hidden lg:flex items-center space-x-8">
                 <Link
                   href="/"
-                  className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium"
+                  className="text-gray-600 hover:text-emerald-600 transition-colors text-sm font-medium"
                 >
                   Inicio
                 </Link>
                 <Link
                   href="/tree"
-                  className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium"
+                  className="text-gray-600 hover:text-emerald-600 transition-colors text-sm font-medium"
                 >
                   Mi Árbol
                 </Link>
                 <Link
                   href="/members"
-                  className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium"
+                  className="text-gray-600 hover:text-emerald-600 transition-colors text-sm font-medium"
                 >
                   Miembros
                 </Link>
@@ -52,7 +52,7 @@ export default function Navbar() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="px-5 py-2 text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-xl hover:bg-white/80 dark:hover:bg-gray-800/80 hover:border-gray-400 dark:hover:border-gray-500 transition-all text-sm font-medium shadow-sm"
+                    className="px-5 py-2 text-gray-700 bg-white/50 backdrop-blur-sm border border-gray-300 rounded-xl hover:bg-white/80 hover:border-gray-400 transition-all text-sm font-medium shadow-sm"
                   >
                     Login
                   </motion.button>
@@ -72,7 +72,7 @@ export default function Navbar() {
               <div className="lg:hidden flex items-center">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400"
+                  className="text-gray-600 hover:text-emerald-600"
                 >
                   <svg
                     className="h-6 w-6"
@@ -100,31 +100,31 @@ export default function Navbar() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="lg:hidden border-t border-gray-200/50 dark:border-gray-700/50"
+              className="lg:hidden border-t border-gray-200/50"
             >
               <div className="px-4 pt-4 pb-6 space-y-3">
                 <Link
                   href="/tree"
-                  className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 rounded-xl transition-colors backdrop-blur-sm"
+                  className="block px-3 py-2 text-gray-600 hover:text-emerald-600 hover:bg-gray-100/50 rounded-xl transition-colors backdrop-blur-sm"
                 >
                   Mi Árbol
                 </Link>
                 <Link
                   href="/members"
-                  className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 rounded-xl transition-colors backdrop-blur-sm"
+                  className="block px-3 py-2 text-gray-600 hover:text-emerald-600 hover:bg-gray-100/50 rounded-xl transition-colors backdrop-blur-sm"
                 >
                   Miembros
                 </Link>
                 <Link
                   href="/"
-                  className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 rounded-xl transition-colors backdrop-blur-sm"
+                  className="block px-3 py-2 text-gray-600 hover:text-emerald-600 hover:bg-gray-100/50 rounded-xl transition-colors backdrop-blur-sm"
                 >
                   Inicio
                 </Link>
                 <div className="pt-4 space-y-2">
                   <Link
                     href="/auth/login"
-                    className="block px-3 py-2 text-center text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-600 rounded-xl hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all backdrop-blur-sm"
+                    className="block px-3 py-2 text-center text-gray-700 bg-white/50 border border-gray-300 rounded-xl hover:bg-white/80 transition-all backdrop-blur-sm"
                   >
                     Login
                   </Link>

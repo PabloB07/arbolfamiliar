@@ -80,20 +80,20 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 flex items-center justify-center px-4 py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md w-full"
       >
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <div className="text-5xl mb-4">🌳</div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Crear Cuenta
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               Comienza tu árbol genealógico hoy
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function SignUpPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mb-4 p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg text-sm"
+              className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm"
             >
               {error}
             </motion.div>
@@ -114,7 +114,7 @@ export default function SignUpPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mb-4 p-3 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded-lg text-sm"
+              className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm"
             >
               {success}
             </motion.div>
@@ -125,7 +125,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Nombre Completo
               </label>
@@ -136,7 +136,7 @@ export default function SignUpPage() {
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="Juan García"
               />
             </div>
@@ -144,7 +144,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Correo Electrónico
               </label>
@@ -155,7 +155,7 @@ export default function SignUpPage() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="tu@email.com"
               />
             </div>
@@ -163,7 +163,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Contraseña
               </label>
@@ -174,10 +174,10 @@ export default function SignUpPage() {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="••••••••"
               />
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              <p className="mt-1 text-xs text-gray-500">
                 Mínimo 8 caracteres
               </p>
             </div>
@@ -185,7 +185,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Confirmar Contraseña
               </label>
@@ -196,7 +196,7 @@ export default function SignUpPage() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="••••••••"
               />
             </div>
@@ -208,13 +208,13 @@ export default function SignUpPage() {
                 required
                 className="w-4 h-4 mt-1 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
               />
-              <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+              <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
                 Acepto los{' '}
-                <Link href="/terms" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+                <Link href="/terms" className="text-emerald-600 hover:underline">
                   términos y condiciones
                 </Link>{' '}
                 y la{' '}
-                <Link href="/privacy" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+                <Link href="/privacy" className="text-emerald-600 hover:underline">
                   política de privacidad
                 </Link>
               </label>
@@ -233,14 +233,14 @@ export default function SignUpPage() {
 
           {/* Divider */}
           <div className="my-6 flex items-center">
-            <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
-            <span className="px-4 text-sm text-gray-500 dark:text-gray-400">o</span>
-            <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+            <div className="flex-1 border-t border-gray-300"></div>
+            <span className="px-4 text-sm text-gray-500">o</span>
+            <div className="flex-1 border-t border-gray-300"></div>
           </div>
 
           {/* Social Sign Up */}
           <div className="space-y-3">
-            <button className="w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors font-medium flex items-center justify-center gap-2">
+            <button className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium flex items-center justify-center gap-2">
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -264,11 +264,11 @@ export default function SignUpPage() {
           </div>
 
           {/* Login Link */}
-          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-6 text-center text-sm text-gray-600">
             ¿Ya tienes cuenta?{' '}
             <Link
               href="/auth/login"
-              className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+              className="text-emerald-600 hover:underline font-medium"
             >
               Inicia sesión
             </Link>

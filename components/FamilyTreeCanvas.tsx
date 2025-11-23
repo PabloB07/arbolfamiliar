@@ -471,10 +471,10 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
         >
           🌱
         </motion.div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">
           Tu árbol está vacío
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-md">
+        <p className="text-gray-600 mb-8 max-w-md">
           Comienza tu legado familiar agregando el primer miembro de tu árbol genealógico
         </p>
         <motion.button
@@ -497,7 +497,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setScale((s) => Math.min(3, s * 1.2))}
-          className="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700"
+          className="p-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200"
           title="Zoom In"
         >
           <span className="text-xl">🔍+</span>
@@ -506,7 +506,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setScale((s) => Math.max(0.3, s * 0.8))}
-          className="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700"
+          className="p-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200"
           title="Zoom Out"
         >
           <span className="text-xl">🔍-</span>
@@ -515,7 +515,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => { setScale(1); setOffset({ x: 0, y: 0 }); }}
-          className="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700"
+          className="p-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-200"
           title="Reset View"
         >
           <span className="text-xl">🎯</span>
@@ -523,8 +523,8 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
       </div>
 
       {/* Zoom indicator */}
-      <div className="absolute bottom-4 right-4 z-10 px-3 py-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+      <div className="absolute bottom-4 right-4 z-10 px-3 py-2 bg-white rounded-lg shadow-lg border border-gray-200">
+        <span className="text-sm font-medium text-gray-700">
           {Math.round(scale * 100)}%
         </span>
       </div>
@@ -558,7 +558,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-hidden border border-gray-200 dark:border-gray-700"
+              className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-hidden border border-gray-200"
             >
               {/* Header */}
               <div className="relative bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 pb-20">
@@ -592,7 +592,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
               </div>
 
               {/* Tabs */}
-              <div className="flex border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-6 -mt-12 relative z-10 shadow-sm">
+              <div className="flex border-b border-gray-200 bg-white px-6 -mt-12 relative z-10 shadow-sm">
                 {[
                   { id: 'info', label: 'Información', icon: '📋' },
                   { id: 'bio', label: 'Biografía', icon: '📖' },
@@ -603,8 +603,8 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                     onClick={() => setActiveTab(tab.id as any)}
                     className={`flex items-center gap-2 px-6 py-3 font-medium transition-all relative ${
                       activeTab === tab.id
-                        ? 'text-emerald-600 dark:text-emerald-400'
-                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                        ? 'text-emerald-600
+                        : 'text-gray-500 hover:text-gray-700
                     }`}
                   >
                     <span>{tab.icon}</span>
@@ -612,7 +612,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                     {activeTab === tab.id && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 dark:bg-emerald-400"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600"
                       />
                     )}
                   </button>
@@ -632,12 +632,12 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {selectedMember.birth_date && (
-                          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                          <div className="bg-white rounded-xl p-4 border border-gray-200">
                             <div className="flex items-center gap-2 mb-2">
                               <span className="text-2xl">🎂</span>
-                              <span className="font-semibold text-gray-700 dark:text-gray-300">Nacimiento</span>
+                              <span className="font-semibold text-gray-700">Nacimiento</span>
                             </div>
-                            <p className="text-gray-900 dark:text-white font-medium">
+                            <p className="text-gray-900 font-medium">
                               {new Date(selectedMember.birth_date).toLocaleDateString('es-ES', { 
                                 year: 'numeric', 
                                 month: 'long', 
@@ -645,7 +645,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                               })}
                             </p>
                             {selectedMember.birth_place && (
-                              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                              <p className="text-sm text-gray-500 mt-1">
                                 📍 {selectedMember.birth_place}
                               </p>
                             )}
@@ -653,12 +653,12 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                         )}
 
                         {selectedMember.occupation && (
-                          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                          <div className="bg-white rounded-xl p-4 border border-gray-200">
                             <div className="flex items-center gap-2 mb-2">
                               <span className="text-2xl">💼</span>
-                              <span className="font-semibold text-gray-700 dark:text-gray-300">Ocupación</span>
+                              <span className="font-semibold text-gray-700">Ocupación</span>
                             </div>
-                            <p className="text-gray-900 dark:text-white font-medium">
+                            <p className="text-gray-900 font-medium">
                               {selectedMember.occupation}
                             </p>
                           </div>
@@ -673,16 +673,16 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700"
+                      className="bg-white rounded-xl p-6 border border-gray-200"
                     >
                       {selectedMember.bio ? (
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                        <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                           {selectedMember.bio}
                         </p>
                       ) : (
                         <div className="text-center py-8">
                           <span className="text-4xl mb-3 block">📝</span>
-                          <p className="text-gray-500 dark:text-gray-400">
+                          <p className="text-gray-500">
                             No hay biografía disponible
                           </p>
                         </div>
@@ -698,9 +698,9 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                       exit={{ opacity: 0, x: 20 }}
                       className="space-y-4"
                     >
-                      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 text-center">
+                      <div className="bg-white rounded-xl p-6 border border-gray-200 text-center">
                         <span className="text-4xl mb-3 block">👨‍👩‍👧‍👦</span>
-                        <p className="text-gray-500 dark:text-gray-400">
+                        <p className="text-gray-500">
                           Las relaciones familiares se mostrarán aquí
                         </p>
                       </div>
@@ -710,7 +710,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
               </div>
 
               {/* Footer */}
-              <div className="border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50 dark:bg-gray-800/50 flex gap-3">
+              <div className="border-t border-gray-200 p-6 bg-gray-50 flex gap-3">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -721,7 +721,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 px-4 py-3 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium border border-gray-300 dark:border-gray-600"
+                  className="flex-1 px-4 py-3 bg-white text-gray-700 rounded-xl hover:bg-gray-100 transition-colors font-medium border border-gray-300"
                 >
                   🔗 Compartir
                 </motion.button>

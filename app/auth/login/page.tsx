@@ -40,20 +40,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 dark:from-black dark:to-gray-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-white to-emerald-50 flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md w-full"
       >
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
           {/* Logo/Header */}
           <div className="text-center mb-8">
             <div className="text-5xl mb-4">🌳</div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Iniciar Sesión
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               Accede a tu árbol genealógico
             </p>
           </div>
@@ -63,7 +63,7 @@ export default function LoginPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mb-4 p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg text-sm"
+              className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm"
             >
               {error}
             </motion.div>
@@ -74,7 +74,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Correo Electrónico
               </label>
@@ -84,7 +84,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="tu@email.com"
               />
             </div>
@@ -92,7 +92,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Contraseña
               </label>
@@ -102,7 +102,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="••••••••"
               />
             </div>
@@ -113,13 +113,13 @@ export default function LoginPage() {
                   type="checkbox"
                   className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
                 />
-                <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                <span className="ml-2 text-sm text-gray-600">
                   Recordarme
                 </span>
               </label>
               <Link
                 href="/auth/forgot-password"
-                className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
+                className="text-sm text-emerald-600 hover:underline"
               >
                 ¿Olvidaste tu contraseña?
               </Link>
@@ -138,14 +138,14 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="my-6 flex items-center">
-            <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
-            <span className="px-4 text-sm text-gray-500 dark:text-gray-400">o</span>
-            <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+            <div className="flex-1 border-t border-gray-300"></div>
+            <span className="px-4 text-sm text-gray-500">o</span>
+            <div className="flex-1 border-t border-gray-300"></div>
           </div>
 
           {/* Social Login */}
           <div className="space-y-3">
-            <button className="w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors font-medium flex items-center justify-center gap-2">
+            <button className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium flex items-center justify-center gap-2">
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -169,11 +169,11 @@ export default function LoginPage() {
           </div>
 
           {/* Sign Up Link */}
-          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-6 text-center text-sm text-gray-600">
             ¿No tienes cuenta?{' '}
             <Link
               href="/auth/signup"
-              className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+              className="text-emerald-600 hover:underline font-medium"
             >
               Regístrate aquí
             </Link>

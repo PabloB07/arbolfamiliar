@@ -74,15 +74,15 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-3xl w-full p-6 my-8"
+        className="bg-white rounded-xl shadow-2xl max-w-3xl w-full p-6 my-8"
       >
         <div className="flex justify-between items-start mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-2xl font-bold text-gray-900">
             {member ? 'Editar Miembro' : 'Nuevo Miembro'}
           </h2>
           <button
             onClick={onCancel}
-            className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            className="text-gray-500 hover:text-gray-700"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -99,7 +99,7 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
           {/* Basic Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Nombre *
               </label>
               <input
@@ -108,13 +108,13 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 value={formData.first_name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="Juan"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Apellido *
               </label>
               <input
@@ -123,13 +123,13 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 value={formData.last_name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="García"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Apellido de Soltera
               </label>
               <input
@@ -137,20 +137,20 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 name="maiden_name"
                 value={formData.maiden_name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="López"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Género
               </label>
               <select
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="">Seleccionar</option>
                 <option value="male">Masculino</option>
@@ -160,7 +160,7 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Fecha de Nacimiento
               </label>
               <input
@@ -168,12 +168,12 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 name="birth_date"
                 value={formData.birth_date}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Lugar de Nacimiento
               </label>
               <input
@@ -181,13 +181,13 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 name="birth_place"
                 value={formData.birth_place}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="Madrid, España"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Fecha de Fallecimiento
               </label>
               <input
@@ -195,12 +195,12 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 name="death_date"
                 value={formData.death_date}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Lugar de Fallecimiento
               </label>
               <input
@@ -208,7 +208,7 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
                 name="death_place"
                 value={formData.death_place}
                 onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 placeholder="Barcelona, España"
               />
             </div>
@@ -216,7 +216,7 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
 
           {/* Additional Information */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Ocupación
             </label>
             <input
@@ -224,13 +224,13 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
               name="occupation"
               value={formData.occupation}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               placeholder="Ingeniero, Médico, etc."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               URL de Foto
             </label>
             <input
@@ -238,13 +238,13 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
               name="photo_url"
               value={formData.photo_url}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               placeholder="https://ejemplo.com/foto.jpg"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Biografía
             </label>
             <textarea
@@ -252,7 +252,7 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
               value={formData.bio}
               onChange={handleChange}
               rows={4}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               placeholder="Escribe una breve biografía..."
             />
           </div>
@@ -272,7 +272,7 @@ export default function MemberForm({ member, onSubmit, onCancel }: MemberFormPro
               whileTap={{ scale: 0.98 }}
               type="button"
               onClick={onCancel}
-              className="flex-1 px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold"
+              className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold"
             >
               Cancelar
             </motion.button>
