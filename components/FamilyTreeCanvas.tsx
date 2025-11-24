@@ -123,7 +123,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
     ctx.fillStyle = backgroundColor;
     ctx.strokeStyle = isHovered ? colors.primary : borderColor;
     ctx.lineWidth = isHovered ? 3 : 2;
-    
+
     // Rounded rectangle
     const radius = 16;
     ctx.beginPath();
@@ -147,7 +147,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
     // Avatar circle
     const avatarX = x + width / 2;
     const avatarY = y + 30;
-    
+
     // Avatar gradient
     const gradient = ctx.createLinearGradient(
       avatarX - AVATAR_SIZE / 2,
@@ -157,7 +157,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
     );
     gradient.addColorStop(0, colors.primary);
     gradient.addColorStop(1, colors.secondary);
-    
+
     ctx.fillStyle = gradient;
     ctx.beginPath();
     ctx.arc(avatarX, avatarY, AVATAR_SIZE / 2, 0, Math.PI * 2);
@@ -285,12 +285,12 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
 
     const dpr = window.devicePixelRatio || 1;
     const rect = container.getBoundingClientRect();
-    
+
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     canvas.style.width = `${rect.width}px`;
     canvas.style.height = `${rect.height}px`;
-    
+
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, rect.width, rect.height);
 
@@ -318,7 +318,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
       const firstNode = layoutTree[0];
       const treeWidth = getTreeWidth(firstNode);
       const centerOffset = (rect.width / scale - treeWidth) / 2;
-      
+
       layoutTree.forEach((node) => {
         offsetNodeX(node, centerOffset);
       });
@@ -385,7 +385,7 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
     const tree = buildTree(members);
     const layoutTree = tree.map((node) => calculateLayout(node, 0, 100));
     const hoveredNode = findNodeAt(layoutTree, x, y);
-    
+
     setHoveredNode(hoveredNode);
     canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
   };
@@ -458,11 +458,11 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
         className="flex flex-col items-center justify-center h-full py-20 text-center"
       >
         <motion.div
-          animate={{ 
+          animate={{
             scale: [1, 1.1, 1],
             rotate: [0, 5, -5, 0]
           }}
-          transition={{ 
+          transition={{
             duration: 2,
             repeat: Infinity,
             repeatType: "reverse"
@@ -601,11 +601,10 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as any)}
-                    className={`flex items-center gap-2 px-6 py-3 font-medium transition-all relative ${
-                      activeTab === tab.id
-                        ? 'text-emerald-600
-                        : 'text-gray-500 hover:text-gray-700
-                    }`}
+                    className={`flex items-center gap-2 px-6 py-3 font-medium transition-all relative ${activeTab === tab.id
+                        ? 'text-emerald-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                      }`}
                   >
                     <span>{tab.icon}</span>
                     <span>{tab.label}</span>
@@ -638,10 +637,10 @@ export default function FamilyTreeCanvas({ members, onMemberClick }: FamilyTreeC
                               <span className="font-semibold text-gray-700">Nacimiento</span>
                             </div>
                             <p className="text-gray-900 font-medium">
-                              {new Date(selectedMember.birth_date).toLocaleDateString('es-ES', { 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
+                              {new Date(selectedMember.birth_date).toLocaleDateString('es-ES', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
                               })}
                             </p>
                             {selectedMember.birth_place && (

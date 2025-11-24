@@ -21,14 +21,14 @@ export default function TreePage() {
   const loadFamilyMembers = async () => {
     try {
       const user = await getCurrentUser();
-      
+
       if (!user) {
         router.push('/auth/login');
         return;
       }
 
       const { data, error: fetchError } = await getFamilyMembers(user.id);
-      
+
       if (fetchError) {
         setError('Error al cargar los miembros de la familia');
         console.error(fetchError);
@@ -78,21 +78,19 @@ export default function TreePage() {
               <div className="flex bg-white rounded-lg shadow-md border border-gray-200">
                 <button
                   onClick={() => setView('tree')}
-                  className={`px-4 py-2 rounded-l-lg transition-colors ${
-                    view === 'tree'
+                  className={`px-4 py-2 rounded-l-lg transition-colors ${view === 'tree'
                       ? 'bg-emerald-600 text-white'
-                      : 'text-gray-600 hover:bg-gray-50
-                  }`}
+                      : 'text-gray-600 hover:bg-gray-50'
+                    }`}
                 >
                   🌳 Árbol
                 </button>
                 <button
                   onClick={() => setView('list')}
-                  className={`px-4 py-2 rounded-r-lg transition-colors ${
-                    view === 'list'
+                  className={`px-4 py-2 rounded-r-lg transition-colors ${view === 'list'
                       ? 'bg-emerald-600 text-white'
-                      : 'text-gray-600 hover:bg-gray-50
-                  }`}
+                      : 'text-gray-600 hover:bg-gray-50'
+                    }`}
                 >
                   📋 Lista
                 </button>

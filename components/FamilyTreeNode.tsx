@@ -17,19 +17,19 @@ export default function FamilyTreeNode({ member, onClick, level = 0 }: FamilyTre
         return {
           gradient: 'from-blue-500 via-blue-600 to-indigo-600',
           icon: '👨',
-          light: 'bg-blue-50 text-blue-700
+          light: 'bg-blue-50 text-blue-700'
         };
       case 'female':
         return {
           gradient: 'from-pink-500 via-rose-600 to-purple-600',
           icon: '👩',
-          light: 'bg-pink-50 text-pink-700
+          light: 'bg-pink-50 text-pink-700'
         };
       default:
         return {
           gradient: 'from-purple-500 via-violet-600 to-indigo-600',
           icon: '👤',
-          light: 'bg-purple-50 text-purple-700
+          light: 'bg-purple-50 text-purple-700'
         };
     }
   };
@@ -76,7 +76,7 @@ export default function FamilyTreeNode({ member, onClick, level = 0 }: FamilyTre
           <motion.div
             className={`absolute inset-0 rounded-full bg-gradient-to-br ${genderStyle.gradient} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300`}
           />
-          
+
           {/* Avatar */}
           <div
             className={`relative w-24 h-24 rounded-full bg-gradient-to-br ${genderStyle.gradient} p-[3px] shadow-xl ring-4 ring-white group-hover:ring-emerald-200 transition-all duration-300`}
@@ -96,7 +96,7 @@ export default function FamilyTreeNode({ member, onClick, level = 0 }: FamilyTre
                   {member.last_name[0]}
                 </div>
               )}
-              
+
               {/* Status indicator */}
               <div className="absolute bottom-1 right-1">
                 <div className={`w-5 h-5 rounded-full ${isAlive ? 'bg-emerald-500' : 'bg-gray-400'} border-2 border-white shadow-md flex items-center justify-center text-xs`}>
