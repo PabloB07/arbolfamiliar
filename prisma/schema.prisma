@@ -6,9 +6,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  // Usa la connection string de Supabase (direct connection, no pooler para migraciones)
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+  // DATABASE_URL usa connection pooling (pgbouncer) para queries
+  // DIRECT_URL usa conexión directa para migraciones
 }
 
 // Perfiles de usuario (vinculado a auth.users de Supabase)

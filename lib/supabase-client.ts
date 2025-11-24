@@ -10,6 +10,7 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
 
 // Auth helpers
 export const signUp = async (email: string, password: string, fullName: string) => {
+  // 1. Crear usuario en Supabase Auth
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -19,6 +20,29 @@ export const signUp = async (email: string, password: string, fullName: string) 
       },
     },
   });
+
+  // 2. Si el registro fue exitoso, sincronizar con Prisma
+  if (data.user && !error) {
+    try {
+      const response = await fetch('/api/auth/sync-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: data.user.id,
+          email: data.user.email,
+          fullName,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('Error syncing profile with Prisma');
+      }
+    } catch (syncError) {
+      console.error('Failed to sync profile:', syncError);
+      // No fallar el registro si la sincronización falla
+    }
+  }
+
   return { data, error };
 };
 
@@ -47,7 +71,7 @@ export const getFamilyMembers = async (userId: string) => {
     .select('*')
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
-  
+
   return { data, error };
 };
 
@@ -60,7 +84,7 @@ export const createFamilyMember = async (
     .insert({ ...memberData, user_id: userId }) as any)
     .select()
     .single();
-  
+
   return { data, error };
 };
 
@@ -74,7 +98,7 @@ export const updateFamilyMember = async (
     .eq('id', memberId)
     .select()
     .single();
-  
+
   return { data, error };
 };
 
@@ -83,7 +107,7 @@ export const deleteFamilyMember = async (memberId: string) => {
     .from('family_members')
     .delete()
     .eq('id', memberId);
-  
+
   return { error };
 };
 
@@ -93,7 +117,7 @@ export const getRelationships = async (userId: string) => {
     .from('relationships')
     .select('*')
     .eq('user_id', userId);
-  
+
   return { data, error };
 };
 
@@ -113,7 +137,7 @@ export const createRelationship = async (
     })
     .select()
     .single();
-  
+
   return { data, error };
 };
 
